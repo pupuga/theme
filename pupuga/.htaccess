@@ -1,0 +1,13 @@
+Options -Indexes
+Order allow,deny
+Deny from all
+
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(map|css|js|eot|ttf|woff|woff2|svg|jpe?g|png|gif|webp|cur)$">
+ Order Allow,Deny
+ Allow from all
+</FilesMatch>

@@ -1,0 +1,51 @@
+@function pow($number, $power) {
+  $value: 1;
+  @if $power > 0 {
+    @for $i from 1 through $power {
+      $value: $number * $value;
+    }
+  }
+
+  @return $value;
+}
+
+@function strip-unit($value) {
+  @if type-of($value) == 'number' and not unitless($value) {
+    $value: $value / ($value * 0 + 1);
+  }
+
+  @return $value;
+}
+
+@function round-unit($value, $delimiter: 2) {
+  $delimiter: pow(10, $delimiter);
+  $value: (floor($value * $delimiter)) / $delimiter;
+
+  @return $value;
+}
+
+@function from-value($size-current, $size-base, $unit, $delimiter: 2) {
+  $size-current: strip-unit($size-current);
+  $size-base: strip-unit($size-base);
+  $size-current-value: round-unit($size-current / $size-base, $delimiter) * $unit;
+
+  @return $size-current-value;
+}
+
+@function em($size-current, $size-base) {
+  $size-current: from-value($size-current, $size-base, 1em);
+
+  @return $size-current;
+}
+
+@function rem($size-current, $size-base) {
+  $size-current: from-value($size-current, $size-base, 1rem);
+
+  @return $size-current;
+}
+
+@function percents($with-current, $with-base, $unit: 100%) {
+  $with-current-percent: from-value($with-current, $with-base, $unit, 4);
+
+  @return $with-current-percent;
+}

@@ -1,0 +1,30 @@
+@import "./assets/src/scss/config";
+
+.exit-popup-config {
+
+  font-family: $font-family;
+
+  @include loading-circle(fixed);
+  @include message();
+
+  &__generated-data {
+    display: none;
+    &--block {
+      display: block;
+    }
+  }
+
+  &__message {
+    display: block;
+    width: 100%;
+    position: relative;
+  }
+
+  &__code {
+    border: none;
+    padding: 0;
+  }
+
+
+
+}

@@ -1,0 +1,15 @@
+@import "common";
+
+@mixin base-light($font-family: sans-serif, $placeholder-color: #9b9b9b) {
+  @include common-typography($font-family);
+  @include common-classes();
+  @include common-important-classes();
+}
+
+@mixin base($font-family: sans-serif, $media-points: 1200 1024 992 768 576 480 320, $placeholder-color: #9b9b9b) {
+  @include common-typography($font-family);
+  @include common-classes();
+  @include common-important-classes();
+  @include common-forms($font-family, $placeholder-color);
+  @include media-hide-visible($media-points);
+}

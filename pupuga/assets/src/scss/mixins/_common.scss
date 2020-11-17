@@ -1,0 +1,241 @@
+@import "media";
+
+@mixin body($font-size: 14px, $max-width: 1240px, $side-width: 10px, $font-family: sans-serif) {
+  html {
+    font-size: $font-size;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    @include media(1024) {
+      font-size: 14px;
+    }
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: $font-family;
+    font-size: 1rem;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .skeleton {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+    @if $max-width > 0 {
+      max-width: $max-width + $side-width * 2;
+      padding-left: $side-width;
+      padding-right: $side-width;
+    }
+    margin: 0 auto;
+  }
+}
+
+@mixin common-typography($font-family) {
+  p {
+    margin: 0;
+  }
+
+  a {
+    outline: none;
+    text-decoration: none;
+  }
+
+  ul,
+  ol,
+  li,
+  dl,
+  dt,
+  dd,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    padding: 0;
+    margin: 0;
+    font-style: normal;
+    font-family: $font-family;
+    line-height: 1;
+  }
+
+  img {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@mixin common-forms($font-family, $placeholder-color) {
+  a, button, input, .pointer, label {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    //user-select: none;
+    //-webkit-touch-callout: none;
+  }
+
+  fieldset,
+  form,
+  label,
+  button,
+  input,
+  textarea,
+  option,
+  select {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: $font-family;
+    line-height: 1;
+  }
+
+  input {
+    -webkit-appearance: none;
+  }
+
+  textarea {
+    resize: none;
+    line-height: 1.6;
+  }
+
+  input[type="submit"],
+  input[type="button"],
+  input[type="color"],
+  button {
+    cursor: pointer;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="color"],
+  textarea {
+    cursor: text;
+    &::placeholder {
+      color: $placeholder-color;
+      font-weight: normal;
+      opacity: 0.7;
+      font-family: $font-family;
+    }
+  }
+
+  input[type="color"] {
+    padding: 2px !important;
+    height: 40px;
+  }
+
+}
+
+@mixin common-classes() {
+  .link,
+  .button,
+  .pointer {
+    cursor: pointer;
+  }
+
+  .display-none {
+    display: none;
+  }
+
+  .display-block {
+    display: block;
+  }
+
+  .display-inline-block {
+    display: inline-block;
+  }
+
+  .alignleft {
+    float: left;
+  }
+
+  .alignright {
+    float: right;
+  }
+
+  .aligncenter {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .width-full {
+    width: 100%;
+  }
+
+  .width-half {
+    width: 50%;
+  }
+
+  .content-left {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .content-center {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .content-right {
+    justify-content: flex-end;
+    text-align: right;
+  }
+}
+
+@mixin common-important-classes() {
+  .display-none-force {
+    display: none !important;
+  }
+
+  .display-block-force {
+    display: block !important;
+  }
+
+  .display-inline-block-force {
+    display: inline-block !important;
+  }
+
+  .template {
+    display: none !important;
+  }
+
+  .background {
+    &--transparent {
+      background: transparent !important;
+    }
+  }
+
+  .underline {
+    text-decoration: underline !important;
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+
+  .field-error {
+    border-color: red !important;
+    background-color: #ffe5e5 !important;
+  }
+
+  .field-checked {
+    border-color: green !important;
+    background-color: #e5f2e5 !important;
+  }
+
+}

@@ -1,0 +1,58 @@
+@mixin message($width: 1024px, $font-size: 16px) {
+  .pupuga-message {
+    font-family: inherit;
+    font-size: $font-size;
+    position: fixed;
+    z-index: 100000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    padding: 10px 15px;
+    &--enable {
+      animation-name: enable;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+    &--disable {
+      animation-name: disable;
+      animation-duration: 1s;
+      animation-fill-mode: forwards;
+    }
+    &:before {
+      content: attr(data-content);
+      width: 100%;
+      max-width: $width;
+      padding: 1em;
+      border: 2px solid;
+      border-radius: 3px;
+      background-color: white;
+      box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.12);
+    }
+    &--info:before {
+      color: green;
+      background-color: #e6f3e6;
+      border-color: green;
+    }
+    &--urgent:before {
+      color: orange;
+      background-color: #fff9ec;
+      border-color: orange;
+    }
+    &--error:before {
+      color: red;
+      background-color: #ffe5e5;
+      border-color: red;
+    }
+  }
+  @keyframes enable {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  @keyframes disable {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
+}
