@@ -21,16 +21,19 @@ abstract class Config
                 // slug must start with common_pupuga_
                 //    'common' => array(
                 //        'Configuration' => array(
-                //            'Title' => array('type' => 'text', 'class' => 'cf-field--third'),,
+                //            'Parameters' => 'config',
+                //            'Test edit' => 'textarea',
                 //            'Loop edit' => array(
                 //                'type' => 'complex',
+                //                'set_layout' => 'tabbed-horizontal',
                 //                'add_fields' => array(
-                //                    'Default timer image' => array('type' => 'image', 'class' => 'cf-field--third'),
-                //                    'Default code image' => array('type' => 'image', 'class' => 'cf-field--third'),
+                //                    array('text', 'title', 'Title'),
+                //                    array('color', 'title_color', 'Title Color'),
+                //                    array('image', 'image', 'Image')
                 //                ),
                 //            )
                 //        )
-                //    )
+                //    )       
                 // false | array
                 //'sidebar' => array('page', 'post')
                 'common' => array(
