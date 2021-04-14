@@ -226,8 +226,12 @@ class Menu
     {
         $this->wp_echo(false);
         $menu = wp_nav_menu($this->args);
-        $menu = str_replace($this->args['search'], $this->args['replace'], $menu);
-        $menu = str_replace($this->args['span_search'], $this->args['span_replace'], $menu);
+        if (isset($this->args['search']) && isset($this->args['replace'])) {
+            $menu = str_replace($this->args['search'], $this->args['replace'], $menu);
+        }
+        if (isset($this->args['span_search']) && isset($this->args['span_search'])) {
+            $menu = str_replace($this->args['span_search'], $this->args['span_replace'], $menu);
+        }
 
         if ($echo) {
             echo $menu;
