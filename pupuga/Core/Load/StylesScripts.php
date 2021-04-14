@@ -41,11 +41,10 @@ class StylesScripts
 
     public function requireFiles()
     {
-        $enqueues = $this->enqueues;
         $dir = $this->dir;
         $url = $this->url;
-        if (is_array($enqueues) && count($enqueues) > 0) {
-            foreach ($enqueues as $type => $enqueue) {
+        if (is_array($this->enqueues) && count($this->enqueues) > 0) {
+            foreach ($this->enqueues as $type => $enqueue) {
                 foreach ($enqueue as $name => $file) {
                     if (is_file($dir . $file)) {
                         switch ($type) {
@@ -65,7 +64,7 @@ class StylesScripts
     public function requireStylesScripts($enqueues)
     {
         $this->enqueues = $enqueues;
-        $this->requireFiles();
+        add_action( 'wp_enqueue_scripts', array($this, 'requireFiles'), 10, 1);
     }
 
     public function requireStylesScriptsIntoFooter($enqueues)

@@ -6,10 +6,12 @@ final class Config
 {
     private $title = 'Exit popup';
     private $prefix = 'exit_popup_';
+    private $main = '';
     private static $instance = null;
 
     private function __construct()
     {
+        $this->setMain();
     }
 
     public static function app(): self
@@ -29,5 +31,14 @@ final class Config
     public function getPrefix(): string
     {
         return $this->prefix;
+    }
+
+    public function getMain(): string
+    {
+        return $this->main;
+    }
+    private function setMain()
+    {
+        $this->main = $this->prefix . 'main';
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Pupuga;
 
+use Pupuga\Modules\ExitPopup\LanguagesFields;
+
 abstract class Config
 {
     protected $config;
@@ -9,7 +11,7 @@ abstract class Config
     protected function __construct()
     {
         $this->config = array(
-            // theme | modules | restapi | array('Correct', 'Media', 'SetConfig', 'PageMain', 'PageLogin', 'PageAdmin', 'Modules')
+            // theme | modules | restapi | array('Correct', 'Media', 'SetConfig', 'PageMain', 'PageLogin', 'PageAdmin')
             'mode' => 'theme',
 
             /**
@@ -19,26 +21,20 @@ abstract class Config
                 // slug must start with common_pupuga_
                 //    'common' => array(
                 //        'Configuration' => array(
-                //            'Parameters' => 'config',
-                //            'Test edit' => 'textarea',
+                //            'Title' => array('type' => 'text', 'class' => 'cf-field--third'),,
                 //            'Loop edit' => array(
                 //                'type' => 'complex',
-                //                'set_layout' => 'tabbed-horizontal',
                 //                'add_fields' => array(
-                //                    array('text', 'title', 'Title'),
-                //                    array('color', 'title_color', 'Title Color'),
-                //                    array('image', 'image', 'Image')
+                //                    'Default timer image' => array('type' => 'image', 'class' => 'cf-field--third'),
+                //                    'Default code image' => array('type' => 'image', 'class' => 'cf-field--third'),
                 //                ),
                 //            )
                 //        )
                 //    )
-	            'common' => array(
-                    'Configuration' => array(
-                        'Popup server' => 'text',
-                    )
-	            )
                 // false | array
                 //'sidebar' => array('page', 'post')
+                'common' => array(
+                )
             ),
 
             // Example - add postType & taxonomy

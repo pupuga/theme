@@ -46,7 +46,7 @@ class GetData
 			'table.terms' => $this->wpdb->terms,
 			'table.taxonomy' => $this->wpdb->term_taxonomy,
 			'table.relationships' => $this->wpdb->term_relationships,
-            'table.usermeta' => $this->wpdb->usermeta
+                        'table.usermeta' => $this->wpdb->usermeta
 		);
 	}
 

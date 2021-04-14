@@ -11,7 +11,7 @@ export default class Fields {
         this._errorFields = [];
         this._message = '';
         for(let field of fields) {
-            if (!self._checkRequired(field) || (field.name === 'domain' && !self._checkDomain(field)) ) {
+            if ( (!self._checkRequired(field) || (field.name === 'domain' && !self._checkDomain(field))) && field.type !== 'file') {
                 this._errorFields.push(field);
             }
         }

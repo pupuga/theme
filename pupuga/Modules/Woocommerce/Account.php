@@ -25,6 +25,10 @@ class Account
         'styles' => array(
             'name' => 'Styles',
             'point' => false
+        ),
+        'languages' => array(
+            'name' => 'Languages',
+            'point' => false
         )
     );
     private $afterItems = array();

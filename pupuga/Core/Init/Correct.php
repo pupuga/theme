@@ -11,7 +11,7 @@ class Correct
         add_action('after_setup_theme', array($this, 'removeAdminBar'));
         add_action('after_setup_theme', array($this, 'themeSetupRemove'));
         add_action('after_setup_theme', array($this, 'themeSetupSupport'));
-	    add_filter('http_request_args', array($this, 'themeAllowHttp'), 10, 1);
+	add_filter('http_request_args', array($this, 'themeAllowHttp'), 10, 1);
         add_filter('pre_get_posts', array($this, 'orderItemsOnAdminPanel'));
     }
 

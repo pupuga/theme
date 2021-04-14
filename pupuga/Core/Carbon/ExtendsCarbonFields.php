@@ -29,23 +29,21 @@ class ExtendsCarbonFields
      * @param string $type
      * @param string $name
      * @param string | null $label
+     * @param string $class
      *
      * @return mixed
      */
-    public function make($type, $name, $label = null)
+    public function make($type, $name, $label = null, $class = '')
     {
-        $method = $type . 'Field';
-        if (!method_exists($this, $method)) {
-            $method = 'defaultField';
-        }
+        $method = (method_exists($this, $type)) ? $type : 'default';
         $field = $this->$method($type, $name, $label);
-        $class = 'pupuga-field--' . $type;
+        $class = "pupuga-field--{$type} {$class}";
         $field->set_classes($class);
 
         return $field;
     }
 
-    private function defaultField($type, $name, $label)
+    private function default($type, $name, $label)
     {
         switch ($type) {
             case 'config' :

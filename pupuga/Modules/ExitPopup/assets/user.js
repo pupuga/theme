@@ -1,2 +1,2 @@
-import "./scss/user.scss";
-import "./js/User";
+import "./scss/user-init.scss";
+import "./js/UserInit";

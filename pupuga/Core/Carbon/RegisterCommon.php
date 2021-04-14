@@ -7,42 +7,51 @@ use Carbon_Fields\Field;
 
 class RegisterCommon
 {
+    private $prefix = 'common_pupuga_';
+
     public function register($config) {
 	    $object = Container::make('theme_options', __('Common'))->set_page_parent('options-general.php');
-
 	    foreach ($config as $tabName => $tabFields) {
 		    $args = array();
-		    foreach ($tabFields as $field => $type) {
-                $slug = str_replace('-', '_', sanitize_title($tabName) . '_' . sanitize_title($field));
-                if (is_array($type)) {
-                    $fieldObject = ExtendsCarbonFields::app()->make($type['type'], 'common_pupuga_' . $slug, $field);
-                    unset($type['type']);
-                    if (count($type) > 0) {
-                        foreach ($type as $condition => $params) {
-                            if ($condition == 'add_fields' && is_array($params) && count($params) > 0) {
-                                $complexFields = array();
-                                foreach ($params as $fieldParams) {
-                                    $complexFields[] = Field::make($fieldParams[0], $fieldParams[1], $fieldParams[2]);
-                                }
-                                $params = $complexFields;
-                            }
-                            $fieldObject->$condition($params);
-                        }
-                    }
-                    $args[] = $fieldObject;
-                } else {
-                    switch ($type) {
-                        case 'config':
-                            $additional = '_xml_object';
-                            break;
-                        default:
-                            $additional = '';
-                    }
-                    $slug = $slug . $additional;
-                    $args[] = ExtendsCarbonFields::app()->make($type, 'common_pupuga_' . $slug, $field);
+		    foreach ($tabFields as $key => $field) {
+                $slug = $this->prefix . str_replace('-', '_', sanitize_title($tabName) . '_' . sanitize_title($key));
+                $title = (isset($field['title'])) ? $field['title'] : $key;
+                switch ($field['type']) {
+                    case 'complex':
+                        $args[] = $this->complex($field, $slug, $title);
+                        break;
+                    case 'config':
+                        $slug = $slug . '_xml_object';
+                        $args[] = $this->default($field, $slug, $title);
+                        break;
+                    default:
+                        $args[] = $this->default($field, $slug, $title);
+                        break;
                 }
 		    }
 		    $object->add_tab(__($tabName), $args);
-	    };
+	    }
+    }
+
+    private function default($field, $slug, $title)
+    {
+        return ExtendsCarbonFields::app()->make($field['type'], $slug, $title, $field['class']);
+    }
+
+    private function complex($complex, $slug, $title)
+    {
+        $fieldObject = ExtendsCarbonFields::app()->make($complex['type'], $slug, $title, $complex['class']);
+        if (is_array($complex['add_fields']) && count($complex['add_fields'])) {
+            $fields = array();
+            foreach ($complex['add_fields'] as $title => $field) {
+                $slug = $this->prefix . str_replace('-', '_', sanitize_title($title));
+                $fields[] = ExtendsCarbonFields::app()->make($field['type'], $slug, $title, $field['class']);
+            }
+            if ($fields) {
+                $fieldObject->add_fields($fields);
+            }
+        }
+
+        return $fieldObject;
     }
 }

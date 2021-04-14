@@ -22,7 +22,7 @@ class PageAdmin
     public function denyDashboardAccess()
     {
         if (is_admin()
-            && (!is_user_logged_in() || !count(array_intersect(array('editor', 'administrator', 'author'), wp_get_current_user()->roles )))
+            && (!is_user_logged_in() || !count(array_intersect(array('editor', 'administrator', 'author'), wp_get_current_user()->roles)))
             && !(defined('DOING_AJAX') && DOING_AJAX)) {
             wp_redirect(site_url() . '/login/');
             exit;

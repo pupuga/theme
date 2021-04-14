@@ -23,7 +23,8 @@ class AccountPage
 
     private function __construct()
     {
-        $this->setPage()
+        $this
+            ->setPage()
             ->setAccountUrl();
         add_action('parse_query', array($this, 'AccountPage'));
     }

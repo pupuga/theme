@@ -23,7 +23,7 @@ final class SaveFields
 
     public function ajax(): void
     {
-        $response = $this->save($_POST);
+        $response = $this->save($_POST, $_FILES);
         echo json_encode(array(
             'done' => 1,
             'error' => $response['error'],
@@ -32,19 +32,17 @@ final class SaveFields
         exit;
     }
 
-    private function save($valueFields): array
+    private function save($valueFields, $valueFiles): array
     {
         $error = 0;
-        $fields = Fields::app()->setSimple()->get();
+        $fields = array();
+        foreach (Fields::app()->get() as $items) {
+            $fields = array_merge($fields, $items);
+        }
         $count = count($fields);
         if ($count) {
             foreach ($fields as $key => $field) {
-                if (isset($valueFields[$key])) {
-                    if (!empty($field['required']) && $valueFields[$key] == '') {
-                        $error = 1;
-                        break;
-                    }
-                } else {
+                if (!isset($valueFields[$key]) && !isset($valueFiles[$key])) {
                     $error = 1;
                     break;
                 }
@@ -52,13 +50,43 @@ final class SaveFields
 
             if ($error === 0) {
                 foreach ($fields as $key => $field) {
-                    update_user_meta(Account::app()->get()->ID, '_' . Config::app()->getPrefix() . $key, htmlspecialchars(mb_substr($valueFields[$key], 0, 200)));
+                    $value = '';
+                    if($field['type'] == 'image') {
+                        if(isset($valueFiles[$key])) {
+                            $ext = explode('.', $valueFiles[$key]['name'])[1];
+                            $dir = wp_upload_dir();
+                            $file = md5(time() . rand()) . '.' . $ext;
+                            $full = $dir['path'] . '/' . $file;
+                            $value = $dir['subdir'] . '/' . $file;
+                            if(strpos($valueFiles[$key]['type'], 'svg') === false) {
+                                $image = wp_get_image_editor($valueFiles[$key]['tmp_name']);
+                                $image->resize( 200, 100, false);
+                                $resize = $image->save();
+                                $tmp = $resize['path'];
+                                rename($tmp, $full);
+                            } else {
+                                move_uploaded_file($valueFiles[$key]['tmp_name'], $full);
+                            }
+                            if (is_file($tmp)) {
+                                unlink($tmp);
+                            }
+                            $old = carbon_get_user_meta(Account::app()->get()->ID, Config::app()->getPrefix() . $key );
+                            if(!empty($dir['basedir']) && is_file($oldFile = $dir['basedir'] . '/' . $old)) {
+                                unlink($oldFile);
+                            }
+                        }
+                    } else {
+                        $value = htmlspecialchars(mb_substr($valueFields[$key], 0, 200));
+                    }
+                    if ($value !== '' || !empty($valueFields[$key])) {
+                        update_user_meta(Account::app()->get()->ID, '_' . Config::app()->getPrefix() . $key, $value);
+                    }
                 }
             }
         }
 
         return array(
-            'error' => $error === 0 ? 0 : $count,
+            'error' => $error === 0 ? 0 : $error,
         );
     }
 }

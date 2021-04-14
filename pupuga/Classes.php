@@ -10,8 +10,8 @@ abstract class Classes {
         ),
         'Modules' => array(
             //'CoolSpeed\Init',
-            'ExitPopup\Init',
-            'Woocommerce\Init',
+            //'ExitPopup\Init',
+            //'Woocommerce\Init',
         ),
         'Custom'  => array(
             //'ThemeMethods\Hooks',

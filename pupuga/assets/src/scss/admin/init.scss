@@ -7,23 +7,23 @@ $block-color: lighten($main-color, 20%);
   border-top-width: 1px !important;
 
   &.cf-field--half {
-    max-width: 100%/2;
+    max-width: (100%/2);
   }
 
   &.cf-field--third {
-    max-width: 100%/3;
+    max-width: (100%/3);
   }
 
   &.cf-field--quarter {
-    max-width: 100%/4;
+    max-width: (100%/4);
   }
 
   &.cf-field--one-fifth {
-    max-width: 100%/5;
+    max-width: (100%/5);
   }
 
   &.cf-field--four-fifth {
-    max-width: 100% - 100%/5;
+    max-width: 100% - (100%/5);
   }
 
   &.cf-field--complex-half {
@@ -34,7 +34,7 @@ $block-color: lighten($main-color, 20%);
 
     .cf-complex__group--grid {
       width: 100%;
-      max-width: 100%/2;
+      max-width: (100%/2);
     }
   }
 
@@ -46,7 +46,7 @@ $block-color: lighten($main-color, 20%);
 
     .cf-complex__group--grid {
       width: 100%;
-      max-width: 100%/3;
+      max-width: (100%/3);
     }
   }
 }
@@ -202,4 +202,12 @@ img[class*="option-thumb"] {
   input {
     max-width: 100%;
   }
+}
+
+.display-none-force {
+  display: none !important;
+}
+
+.display-none {
+  display: none;
 }

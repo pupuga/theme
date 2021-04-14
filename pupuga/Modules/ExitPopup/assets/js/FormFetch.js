@@ -14,17 +14,16 @@ export default class FormFetch {
     }
 
     fetch() {
-        fetch(typeof this._params.url === 'undefined' ? globalVars.url : this._params.url, {
+        let self = this;
+        fetch(typeof self._params.url === 'undefined' ? globalVars.url : self._params.url, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-            },
-            body: new URLSearchParams(this._formData),
+            body: self._formData,
             credentials: 'same-origin'
         })
           .then(response => response.json())
           .then(response => {
-              this._params.callback(response);
+              //console.log(response);
+              return self._params.callback(response);
           })
           .catch(err => console.log(err));
     }

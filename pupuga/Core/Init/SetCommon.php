@@ -30,8 +30,10 @@ class SetCommon
 
 	private function setConstants()
 	{
-		$params = ((array) Base\Common::app()->get( 'configuration_parameters' )->theme)['@attributes'];
-		define('THEME_NAME', strtolower(str_replace(' ', '', $params['name'])));
+        $config = Base\Common::app()->get( 'configuration_parameters' );
+        $params = (isset($config)) ? (array) $config : array();
+        $theme = (!empty($params) && isset($params['@attributes']['name'])) ? strtolower(str_replace(' ', '', $params['@attributes']['name'])) : '';
+        define('THEME_NAME', $theme);
 	}
 
     /**

@@ -6,7 +6,7 @@ use Pupuga\Core\Base;
 
 class Boot
 {
-    private $version = '20200625';
+    private $version = '20210414';
     private $slugPrefix = 'pupuga_';
 
     private static $instance;

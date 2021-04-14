@@ -1,8 +1,8 @@
 @import "units";
 
 @mixin circles($size: 12px, $stroke-width: 2px, $full-line-color: gray, $progress-line-color: orange, $stroke-linecap: butt) {
-  $center-point: $size/2;
-  $radius: ($size - $stroke-width)/2;
+  $center-point: ($size/2);
+  $radius: (($size - $stroke-width)/2);
   $circle-width: round-unit(2 * $radius * 3.14159265358979, 0);
   $circle-width-value: strip-unit($circle-width);
   $time: 1s;

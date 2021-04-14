@@ -2,6 +2,8 @@
 
 namespace Pupuga\Modules\ExitPopup;
 
+use Pupuga\Modules\ExitPopup\Fields;
+
 class Account
 {
     private $user;
@@ -17,12 +19,12 @@ class Account
         return self::$instance;
     }
 
-    public function get(): object
+    public function get()
     {
         return $this->user;
     }
 
-    public function getMeta(): array
+    public function getMeta()
     {
         return (isset($this->user->ID)) ? get_user_meta($this->user->ID) : array();
     }
@@ -36,5 +38,4 @@ class Account
     {
         $this->user = wp_get_current_user();
     }
-
 }

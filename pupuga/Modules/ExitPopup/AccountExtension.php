@@ -35,10 +35,11 @@ final class AccountExtension {
     private function getFields(): array
     {
         $fields = array();
-        foreach (Fields::app()->setSimple()->get() as $key => $field) {
-            $type = ($field['type'] == 'number' || $field['type'] == 'color' || $field['type'] == 'bool') ? 'text' : $field['type'];
-            $fields[] = Field::make( $type, $this->prefix . $key, $field['title'] )
-                ->set_default_value($field['value']);
+        foreach (Fields::app()->get() as $type => $typeFields) {
+            foreach ($typeFields as $key => $field) {
+                $fields[] = Field::make( 'text', $this->prefix . $key, $field['title'] . ((isset($field['marker'])) ? ' - ' . $field['marker'] : ''))
+                    ->set_default_value($field['value']);
+            }
         }
 
         return $fields;
