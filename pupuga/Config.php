@@ -47,7 +47,7 @@ abstract class Config
             //      'icon' => 'dashicons-calendar-alt',
             //      'supports' => array('title', 'editor', 'excerpt', 'thumbnail'),
             //      'taxonomies' => array('post_tag', 'category'),
-            //      'addTaxonomies' => array(array('single' => 'Single taxonomy', 'many' => 'Many taxonomies'))
+            //      'addTaxonomies' => array(array('single' => 'Single taxonomy', 'many' => 'Many taxonomies')),
             //      'parameters' => array()
             // )
             'registerPostTypesTaxonomies' => array(

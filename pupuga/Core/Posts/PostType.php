@@ -11,7 +11,7 @@ class PostType
     public $action;
     public $postId;
 
-    public static function add($labels, $parameters)
+    public static function add($labels, $parameters = array())
     {
         $selfObject = new self($labels, __METHOD__);
         $selfObject->setDefaultArgs($selfObject->labels($selfObject->labels), $parameters);
