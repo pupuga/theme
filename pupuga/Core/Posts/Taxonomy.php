@@ -16,12 +16,12 @@ class Taxonomy
     public static function app($taxonomy = array(), $postTypes = array(), $labelsCustom = array())
     {
         $object = new self();
+        $object->taxonomy = $taxonomy;
+        $object->postTypes = $postTypes;
+        $object->labelsCustom = $labelsCustom;
 	    if (!isset($object->taxonomy['many'])) {
 		    $object->taxonomy['many'] = $object->taxonomy['single'];
 	    }
-	    $object->taxonomy = $taxonomy;
-	    $object->postTypes = $postTypes;
-	    $object->labelsCustom = $labelsCustom;
 	    if (isset($taxonomy['params']) && is_array($taxonomy['params']) && count($taxonomy['params']) > 0) {
             $object->configCustom = $taxonomy['params'];
         };

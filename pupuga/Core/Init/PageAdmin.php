@@ -12,8 +12,7 @@ class PageAdmin
         add_action('admin_init', array($this, 'denyDashboardAccess'));
         if (is_admin()) {
             // admin style & scripts
-            $this->addStyles();
-            add_action('admin_head', array($this, 'addScripts'));
+            $this->addStylesScripts();
             add_filter('mce_external_plugins', array($this, 'tinyMceAddScripts'));
             add_filter('mce_buttons_3', array($this, 'tinyMceAddButtons'));
         }
@@ -29,25 +28,17 @@ class PageAdmin
         }
     }
 
-    public function addStyles()
+    public function addStylesScripts()
     {
         $enqueues = array(
             'styles' => array(
                 'style-admin' => 'admin.css'
-            )
-        );
-        Load\StylesScripts::app()->requireStylesScripts($enqueues);
-    }
-
-    public function addScripts()
-    {
-
-        $enqueues = array(
+            ),
             'scripts' => array(
                 'script-admin' => 'admin.js',
             )
         );
-        Load\StylesScripts::app()->requireStylesScripts($enqueues);
+        Load\StylesScripts::app()->requireStylesScripts($enqueues, 'admin_enqueue_scripts');
     }
 
     /**

@@ -9,9 +9,6 @@ abstract class Classes {
             'Carbon\Init'
         ),
         'Modules' => array(
-            //'CoolSpeed\Init',
-            //'ExitPopup\Init',
-            //'Woocommerce\Init',
         ),
         'Custom'  => array(
             //'ThemeMethods\Hooks',

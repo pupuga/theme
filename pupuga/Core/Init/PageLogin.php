@@ -11,7 +11,7 @@ class PageLogin
     {
         if ($GLOBALS['pagenow'] == 'wp-login.php') {
             // login style & scripts
-            add_action('login_head', array($this, 'addStylesScripts'));
+            $this->addStylesScripts();
             add_action('login_enqueue_scripts', array($this, 'setLogoImage'));
             add_filter('login_headerurl', array($this, 'setLogoUrl'));
             add_filter('login_headertext', array($this, 'setLogoTitle'));
@@ -29,7 +29,7 @@ class PageLogin
             )
         );
 
-	    Load\StylesScripts::app()->requireStylesScripts($enqueues);
+	    Load\StylesScripts::app()->requireStylesScripts($enqueues, 'login_enqueue_scripts');
     }
 
     public function setLogoImage()

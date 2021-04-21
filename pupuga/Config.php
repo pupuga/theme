@@ -2,8 +2,6 @@
 
 namespace Pupuga;
 
-use Pupuga\Modules\ExitPopup\LanguagesFields;
-
 abstract class Config
 {
     protected $config;
