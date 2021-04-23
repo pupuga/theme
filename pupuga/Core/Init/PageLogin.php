@@ -6,8 +6,9 @@ use Pupuga\Core\Load;
 
 class PageLogin
 {
+    use InstanceTrait;
 
-    public function __construct()
+    private function __construct()
     {
         if ($GLOBALS['pagenow'] == 'wp-login.php') {
             // login style & scripts

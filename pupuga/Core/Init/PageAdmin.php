@@ -6,7 +6,9 @@ use Pupuga\Core\Load;
 
 class PageAdmin
 {
-    public function __construct()
+    use InstanceTrait;
+
+    private function __construct()
     {
         //denied dashboard access
         add_action('admin_init', array($this, 'denyDashboardAccess'));
@@ -38,7 +40,7 @@ class PageAdmin
                 'script-admin' => 'admin.js',
             )
         );
-        Load\StylesScripts::app()->requireStylesScripts($enqueues, 'admin_enqueue_scripts');
+        Load\StylesScripts::app()->requireStylesScripts($enqueues, 'admin_footer');
     }
 
     /**

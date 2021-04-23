@@ -8,10 +8,11 @@ use Pupuga\Core\Posts;
 
 class SetConfig extends Pupuga\Config
 {
+    use InstanceTrait;
     use Base\VerifyVar;
     private $customPostType = array();
 
-    public function __construct()
+    protected function __construct()
     {
         parent::__construct();
 
@@ -163,7 +164,7 @@ class SetConfig extends Pupuga\Config
                 ->action();
         };
 
-        add_action('pre_get_posts', array($this, 'removeSlugFromLink') );
+        //add_action('pre_get_posts', array($this, 'removeSlugFromLink') );
     }
 
     public function removeSlugFromLink( $query ) {

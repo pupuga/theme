@@ -12,7 +12,7 @@ class Init extends Config
     {
         parent::__construct();
         Common::app()->config = $this->config;
-        Files\Classes::launchClasses($this->getInitClasses(), __NAMESPACE__);
+        Files\Classes::launchClasses($this->getInitClasses(), __NAMESPACE__, true);
     }
 
     private function getInitClasses()

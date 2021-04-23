@@ -4,13 +4,17 @@ namespace Pupuga\Libs\Files;
 
 class Classes
 {
-    public static function launchClasses($classes, $namespace, $init = false)
+    public static function launchClasses($classes, $namespace, $static = false, $init = '')
     {
         if (count($classes)) {
-            $init = ($init) ? '\\' . $init : '';
+            $init = (empty($init)) ? '' : '\\' . $init;
             foreach ($classes as $class) {
                 $class = $namespace . '\\' . $class . $init;
-                new $class;
+                if ($static) {
+                    $class::app();
+                } else {
+                    new $class;
+                }
             }
         }
     }

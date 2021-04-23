@@ -8,7 +8,9 @@ use Pupuga\Libs\Data;
 
 class SetCommon
 {
-    public function __construct()
+    use InstanceTrait;
+
+    private function __construct()
     {
         $this->setCommon();
 	    $this->setConstants();

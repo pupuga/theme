@@ -6,17 +6,19 @@ use Pupuga\Core\Load;
 
 class PageMain
 {
+    use InstanceTrait;
 
-    public function __construct()
+    private function __construct()
     {
         if (!is_admin() && $GLOBALS['pagenow'] != 'wp-login.php') {
             $this->addCoreStyles();
-            $this->addCoreScripts();
+            $this->addJqueryAction();
+            $this->addVarsAction();
             $this->addStylesScript();
         }
     }
 
-    public function addStylesScript()
+    public function addStylesScript(): void
     {
         $enqueues = array(
             'styles' => array(
@@ -33,12 +35,12 @@ class PageMain
         Load\StylesScripts::app()->requireStylesScriptsIntoFooter($enqueues);
     }
 
-    private function addCoreStyles()
+    private function addCoreStyles(): void
     {
         add_action('get_header', array($this, 'addDefaultMainStyles'));
     }
 
-    public function addDefaultMainStyles()
+    public function addDefaultMainStyles(): void
     {
         wp_enqueue_style('style', URL_MAIN . 'style.css');
         $style = (!defined('THEME_NAME') || empty(THEME_NAME))
@@ -49,23 +51,28 @@ class PageMain
         }
     }
 
-    private function addCoreScripts()
+    public function addJqueryAction(bool $footer = true): void
     {
-        add_action('wp_enqueue_scripts', array($this, 'jQueryCore'));
-        add_action('wp_enqueue_scripts', array($this, 'ajaxVars'));
+        $action = ($footer === true) ? 'get_footer' : 'wp_enqueue_scripts';
+        add_action($action, array($this, 'addJquery'));
     }
 
-    public function jQueryCore()
+    public function addJquery(): void
     {
         wp_deregister_script( 'jquery-core');
         wp_deregister_script('jquery');
-        wp_register_script('jquery-core', get_home_url() . '/wp-includes/js/jquery/jquery.min.js', false, null, true );
-        wp_register_script('jquery', false, array('jquery-core'), null, true );
+        wp_register_script('jquery-core', site_url() . '/wp-includes/js/jquery/jquery.min.js', false);
+        wp_register_script('jquery', false, array('jquery-core'));
         wp_enqueue_script('jquery');
         //wp_enqueue_script('jquery-migrate');
     }
 
-    public function ajaxVars()
+    public function addVarsAction()
+    {
+        add_action('wp_enqueue_scripts', array($this, 'addVars'));
+    }
+
+    public function addVars()
     {
         wp_localize_script('jquery', 'globalVars', array(
             'url' => admin_url('admin-ajax.php'),

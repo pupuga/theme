@@ -4,7 +4,9 @@ namespace Pupuga\Core\Init;
 
 class Media
 {
-    public function __construct()
+    use InstanceTrait;
+
+    private function __construct()
     {
         // *.svg
         add_filter('upload_mimes', array($this, 'addMimesFile'));

@@ -1,3 +1,4 @@
 @import "../config";
 
-@include base();
+@include body($font-size, $max-width, $side-width, $font-family);
+@include base($font-family);
