@@ -15,7 +15,6 @@
   body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     font-family: $font-family;
     font-size: 1rem;
     width: 100%;
@@ -26,17 +25,24 @@
   }
 
   .skeleton {
-    display: flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
-    width: 100%;
-    @if $max-width > 0 {
-      max-width: $max-width + $side-width * 2;
-      padding-left: $side-width;
-      padding-right: $side-width;
+    @include skeleton($max-width, $side-width);
+    &--center {
+      justify-content: center;
     }
-    margin: 0 auto;
   }
+}
+
+@mixin skeleton($max-width, $side-width) {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: 100%;
+  @if $max-width > 0 {
+    max-width: $max-width + $side-width * 2;
+    padding-left: $side-width;
+    padding-right: $side-width;
+  }
+  margin: 0 auto;
 }
 
 @mixin common-typography($font-family) {
@@ -143,6 +149,14 @@
 }
 
 @mixin common-classes() {
+  div,
+  header,
+  footer,
+  section,
+  nav {
+    box-sizing: border-box;
+  }
+
   .link,
   .button,
   .pointer {

@@ -16,7 +16,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = (env, options) => {
 
     const production = (options.mode === 'production');
-    
+
     return {
 
         mode: options.mode,
@@ -47,7 +47,7 @@ module.exports = (env, options) => {
         watchOptions: {
             aggregateTimeout: 100
         },
-        
+
         plugins: [
             new CleanWebpackPlugin(),
             new webpack.DefinePlugin({
@@ -89,7 +89,7 @@ module.exports = (env, options) => {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                postcssOptions: {    
+                                postcssOptions: {
                                     plugins: [
                                         require('autoprefixer')({
                                             overrideBrowserslist: ['> 2%']
@@ -120,14 +120,14 @@ module.exports = (env, options) => {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                postcssOptions: {    
+                                postcssOptions: {
                                     plugins: [
                                         require('cssnano')({
                                             preset: [
                                                 'default',
-                                                {discardComments: {removeAll: true,}}
+                                                {discardComments: {removeAll: true}}
                                             ],
-                                        }), 
+                                        }),
                                     ],
                                 }
                             }
@@ -137,23 +137,27 @@ module.exports = (env, options) => {
                 {
                     test: /\.(eot|svg|ttf|woff|woff2)$/i,
                     exclude: /(images)/,
-                    use: {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[ext]'
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: '[name].[ext]'
+                            }
                         }
-                    }
+                    ]
                 },
                 {
                     test: /\.(cur|gif|png|jpe?g|svg)$/i,
                     exclude: /(fonts)/,
-                    use: {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 40960,
-                            name: '[name].[ext]'
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 4096,
+                                name: '[name].[ext]'
+                            }
                         }
-                    },
+                    ]
                 }
             ]
         },

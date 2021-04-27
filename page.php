@@ -1,1 +1,1 @@
-<?php get_header() ?>    <?php if ( have_posts() ) : ?>        <?php while ( have_posts() ) : the_post(); ?>            <?php the_content() ?>        <?php endwhile ?>    <?php endif ?><?php get_footer() ?>
+<?php get_header() ?>    <section class="general-section">        <div class="skeleton">            <?php if (have_posts()) : ?>                <?php while (have_posts()) : the_post(); ?>                    <?php the_content() ?>                <?php endwhile ?>            <?php endif ?>        </div>    </section><?php get_footer() ?>
